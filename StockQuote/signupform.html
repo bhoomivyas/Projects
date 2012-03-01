@@ -1,0 +1,169 @@
+ <HTML><HEAD><TITLE>Create Your Account</TITLE>
+<META http-equiv=Content-Language content=en-us>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<SCRIPT language=Javascript>
+
+function validateform()
+{
+       if(document.form1.fname.value=="" ||
+           document.form1.mname.value==""||
+           document.form1.lname.value=="" ||
+           document.form1.addr.value=="" ||
+           document.form1.city.value=="" ||
+           document.form1.state.value=="" ||
+           document.form1.zip.value==""||
+           document.form1.login.value==""||
+           document.form1.passwd.value==""|| 
+           document.form1.cfpasswd.value==""||
+           document.form1.stock1.value==""||
+           document.form1.stock2.value==""||
+           document.form1.stock3.value=="")
+         
+        {
+            alert("Please fill in the details in all the fields");
+            return false;
+        
+        }	
+				
+	if(document.form1.passwd.value!=document.form1.cfpasswd.value)
+	{
+		 alert("Confirm Password:Please Retype Password.")
+ 	         document.form1.passwd.value="";	
+		 document.form1.cfpasswd.value="";						 return false;
+	}	
+        
+        vzip=document.form1.zip.value;
+        
+        for(i=0;i<vzip.length;i++)
+        {
+        	if(vzip.charAt(i)< "0" || vzip.charAt(i)>"9")
+        	{
+       		  alert("Zipcode:This field accepts only Number.")	
+       		  return false;
+       		}	
+        }
+		
+	if(vzip.length > 5 || vzip.length < 5)
+	{					
+		alert("Zipcode:Please Enter valid Zipcode.");
+		return false;
+					
+	}
+				
+	vstock1=document.form1.stock1.value;
+	vstock2=document.form1.stock2.value;
+	vstock3=document.form1.stock3.value;
+
+	for(i=0;i<vstock1.length;i++)
+	{
+	    if(!((vstock1.charAt(i) >= "a" && vstock1.charAt(i) <= "z") ||
+                 (vstock1.charAt(i) >= "A" && vstock1.charAt(i) <= "Z")))
+            {
+            	
+            	alert("Stock1:This field accepts only characters." +vstock1.length);
+            	return false;
+            }
+         }
+         
+         for(i=0;i<vstock2.length;i++)
+	 {
+       	    if(!((vstock2.charAt(i) >= "a" && vstock2.charAt(i) <= "z") ||
+                 (vstock2.charAt(i) >= "A" && vstock2.charAt(i) <= "Z")))
+            {
+            	
+            	alert("Stock2:This field accepts only characters." +vstock2.length);
+            	return false;
+            }
+         } 
+          
+         for(i=0;i<vstock3.length;i++)
+	 {
+  	    if(!((vstock3.charAt(i) >= "a" && vstock3.charAt(i) <= "z") ||
+                 (vstock3.charAt(i) >= "A" && vstock3.charAt(i) <= "Z")))
+            {	
+            	alert("Stock3:This field accepts only characters." +vstock3.length);
+            	return false;
+            }
+         }
+
+
+        
+         if(vstock1.length >4)
+         {
+		alert("Stock1:Please Enter Valid Stock.");
+       		return false;
+         } 
+
+         if(vstock2.length >4)
+         {
+		alert("Stock2:Please Enter Valid Stock.");
+        	return false;
+         } 
+         
+         if(vstock3.length >4)
+         {
+        	alert("Stock3:Please Enter Valid Stock.");
+        	return false;
+        }
+
+}
+
+
+
+</SCRIPT>
+
+</HEAD>
+<BODY STYLE="background-color:gray">
+<CENTER>
+<H1 align=center><FONT COLOR="WHITE">Create Your Account</FONT></H1>
+<FORM name="form1"  action="/examples/servlets/servlet/register" method=post onSubmit="return validateform()">
+<TABLE cellPadding=4 width='cellspacing="0"' border=0>
+  <TBODY>
+  <TR>
+    <TD colSpan=8>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD><FONT COLOR="WHITE">First Name:</FONT></TD>
+    <TD><INPUT name=fname></TD>
+    <TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="WHITE"> Middle Initial:</FONT></TD>
+    <TD><INPUT name=mname></TD>
+    <TD><FONT COLOR="WHITE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Last Name:</FONT></TD>
+    <TD><INPUT name=lname></TD></TR>
+  <TR>
+    <TD><FONT COLOR="WHITE">Addres:</FONT></TD>
+    <TD colSpan=8><INPUT size=125 name=addr></TD></TR>
+  <TR>
+    <TD><FONT COLOR="WHITE">City:</FONT></TD>
+    <TD><INPUT name=city></TD>
+    <TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="WHITE"> State:</FONT></TD>
+    <TD><INPUT name=state></TD>
+    <TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="WHITE"> Zipcode:</FONT></TD>
+    <TD><INPUT name=zip></TD></TR>
+  <TR>
+    <TD colSpan=8>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD><FONT COLOR="WHITE">Login Name:</FONT></TD>
+    <TD><INPUT name=login></TD>
+    <TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="WHITE"> Password:</FONT></TD>
+    <TD><INPUT type=password name=passwd></TD>
+    <TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="WHITE"> Confirm Password:</FONT></TD>
+    <TD><INPUT type=password name=cfpasswd></TD></TR>
+  <TR>
+    <TD colSpan=8>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD><FONT COLOR="WHITE">Your Favourite Stocks:</FONT></TD>
+    <TD><INPUT name=stock1></TD>
+    <TD><INPUT name=stock2></TD>
+    <TD><INPUT name=stock3></TD>
+  </TR>
+  <TR>
+    <TD colSpan=8>
+      <HR>
+    </TD></TR></TBODY></TABLE>
+<BR /><BR />
+<P><INPUT type=submit align=middle value="Submit" ></CENTER></P></FORM></BODY></HTML>
