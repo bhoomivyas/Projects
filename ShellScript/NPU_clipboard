@@ -1,0 +1,96 @@
+#!/bin/sh
+
+
+
+echo -e "\e[1;32m
+         _ _    _
+        /  /_  (_)_ _ _ _ _ _ _
+       / _ _ \/ / _ _ _/  _ _ _/
+      / /_ / / / /_  _(_ _   )
+     /_ _ _ /_/\_ _ _/_ _ _ /
+
+\e[0m"
+
+echo -e "\e[1;32m
+
+                                0.1.1  clipboard.clip
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\e[0m"
+x=0
+while read line
+do
+	let x=x+1
+	echo -e  "\e[1;32m\t$x\t$line
+		 \e[0m"
+done < phone_book
+
+#echo -e "\t`cat phone_book`"
+
+
+echo -e "\e[1;32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	a)dd	r)emove    c)lear    h)elp    e)xit
+\e[0m"
+
+
+
+
+#echo " Enter any one of the options above:"
+j=0
+while [ "$i" != "e" ]
+do
+	echo -e "\e[1;32m Please choose one of the options above: \e[0m"
+	read i
+	i=`echo $i | tr '[A-Z]' '[a-z]'`
+	case "$i" in
+		
+		a) count=0
+		   while [ $count -eq 0 ]
+		   do
+		   	echo -e "\e[1;32mEnter the name and phone number to be added:\e[0m"
+		   	read field
+		   	ph_num=`echo $field | awk '{print $NF }'`
+		   	check=`echo $ph_num | egrep -c "[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]"`
+		   	if [ $check -eq "0" ]; then
+				echo "Incorrect phone number, please re-enter in xxx-xxx-xxxx format"
+				count=0
+		   	else
+		   		echo "$field" >> phone_book
+				count=1
+		   		echo -e "\n";
+		   		while read field
+		   		do
+        	   			let j=j+1
+		        		echo -e "\e[1;32m$j\t$field\e[0m"
+		   		done < phone_book
+		   	fi
+		   	echo -e "\n"
+		   done
+		   ;;
+
+		r) echo -e "\e[1;32mEnter the line number to be deleted:\e[0m"
+		   read num	
+		   sed ''$num'd' phone_book > temp
+		   mv temp phone_book
+		   echo ""
+		   awk '{ print NR ". " $0 }' phone_book
+		   ;;
+		   
+		c) echo "`sed -e '1,$d' phone_book > phone_book`"
+		   echo -e "\e[1;32mEvery name and phone number is cleared!\e[0m";;
+
+		h) echo -e "\e[1;32mEnter the name to be searched:\e[0m"
+		   read name
+		   count=`cat phone_book | grep -c $name`
+		   if [ "$count" -eq "0" ]; then
+			echo -e "\e[1;32m$name is not at phone_book!\e[0m"
+		   else
+			echo -e "\e[1;32m$name is at phone_book!\e[0m"
+		   fi
+		   ;;
+		   
+		e) echo -e "\e[1;32mGood Bye!\e[0m" 
+		   exit 0;;
+
+	esac
+done  
+exit 0
